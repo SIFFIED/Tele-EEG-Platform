@@ -26,8 +26,6 @@ Tele-EEG-Platform 是一款前沿的 Web 平台，专为实时采集、高级分
 
 ## ⚙️ 架构
 
-![Uploading architecture diagram.png…]()
-
 简化的架构概览：
 
 1.  **数据采集：** EEG 数据通过 WebSockets 从 EEG 设备流向前端。
