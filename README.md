@@ -26,7 +26,7 @@ Tele-EEG-Platform 是一款前沿的 Web 平台，专为实时采集、高级分
 
 ## ⚙️ 架构
 
-![](C:\Users\Administrator\Desktop\architecture diagram.png)
+![Uploading architecture diagram.png…]()
 
 简化的架构概览：
 
