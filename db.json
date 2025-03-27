@@ -1,0 +1,114 @@
+{
+  "data": [
+    {
+      "timestamp": "2024-03-20 10:00:00",
+      "channel1": 230.5,
+      "channel2": 450.6,
+      "channel3": -120.3,
+      "channel4": 340.8,
+      "channel5": -150.7,
+      "channel6": 280.9,
+      "channel7": -80.4,
+      "channel8": 190.2
+    },
+    {
+      "timestamp": "2024-03-20 10:00:01",
+      "channel1": 250.7,
+      "channel2": 420.3,
+      "channel3": -140.5,
+      "channel4": 310.2,
+      "channel5": -180.9,
+      "channel6": 260.4,
+      "channel7": -100.1,
+      "channel8": 210.5
+    },
+    {
+      "timestamp": "2024-03-20 10:00:02",
+      "channel1": 210.8,
+      "channel2": 480.9,
+      "channel3": -110.7,
+      "channel4": 370.5,
+      "channel5": -130.4,
+      "channel6": 300.2,
+      "channel7": -70.8,
+      "channel8": 170.6
+    },
+    {
+      "timestamp": "2024-03-20 10:00:03",
+      "channel1": 280.4,
+      "channel2": 430.7,
+      "channel3": -150.2,
+      "channel4": 330.9,
+      "channel5": -160.8,
+      "channel6": 270.5,
+      "channel7": -90.3,
+      "channel8": 220.8
+    },
+    {
+      "timestamp": "2024-03-20 10:00:04",
+      "channel1": 240.6,
+      "channel2": 460.8,
+      "channel3": -130.9,
+      "channel4": 350.7,
+      "channel5": -140.2,
+      "channel6": 290.8,
+      "channel7": -80.9,
+      "channel8": 200.4
+    },
+    {
+      "timestamp": "2024-03-20 10:00:05",
+      "channel1": 260.9,
+      "channel2": 440.5,
+      "channel3": -120.8,
+      "channel4": 320.4,
+      "channel5": -170.5,
+      "channel6": 280.1,
+      "channel7": -100.6,
+      "channel8": 180.9
+    },
+    {
+      "timestamp": "2024-03-20 10:00:06",
+      "channel1": 220.3,
+      "channel2": 470.2,
+      "channel3": -140.7,
+      "channel4": 360.8,
+      "channel5": -150.9,
+      "channel6": 310.5,
+      "channel7": -70.2,
+      "channel8": 230.1
+    },
+    {
+      "timestamp": "2024-03-20 10:00:07",
+      "channel1": 270.8,
+      "channel2": 410.9,
+      "channel3": -110.4,
+      "channel4": 380.2,
+      "channel5": -180.3,
+      "channel6": 250.7,
+      "channel7": -90.8,
+      "channel8": 190.7
+    },
+    {
+      "timestamp": "2024-03-20 10:00:08",
+      "channel1": 250.1,
+      "channel2": 450.3,
+      "channel3": -130.6,
+      "channel4": 340.1,
+      "channel5": -160.2,
+      "channel6": 290.4,
+      "channel7": -80.1,
+      "channel8": 210.9
+    },
+    {
+      "timestamp": "2024-03-20 10:00:09",
+      "channel1": 23.9,
+      "channel2": 43.8,
+      "channel3": -15.8,
+      "channel4": 37.9,
+      "channel5": -14.8,
+      "channel6": 27.2,
+      "channel7": -10.4,
+      "channel8": 20.8
+    }
+  ]
+}

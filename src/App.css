@@ -1,38 +1,398 @@
-.App {
-  text-align: center;
+/* 全局样式 */
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #f8fafc;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: #1e293b;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+/* 导航栏样式 */
+.navbar {
+  background-color: white;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid rgba(229, 231, 235, 0.5);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+/* 脑电数据分析系统特定样式 */
+.eeg-panel {
+  background-color: white;
+  border-radius: 0.75rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+  transition: all 0.2s ease;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.eeg-panel:hover {
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+.eeg-panel-header {
   display: flex;
-  flex-direction: column;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid #f1f5f9;
+  margin-bottom: 1rem;
+}
+
+.eeg-panel-indicator {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: #3b82f6;
+  margin-right: 0.5rem;
+}
+
+.eeg-electrode-map {
+  position: relative;
+  width: 100%;
+  height: 300px;
+  background-color: #f0f0f0;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.eeg-electrode {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: rgba(59, 130, 246, 0.5);
+  border: 2px solid #3b82f6;
+  transform: translate(-50%, -50%);
+  transition: all 0.2s ease;
+}
+
+.eeg-electrode:hover {
+  background-color: rgba(59, 130, 246, 0.8);
+  transform: translate(-50%, -50%) scale(1.2);
+}
+
+.eeg-heatmap {
+  border-radius: 0.5rem;
+  overflow: hidden;
+}
+
+.eeg-waveform {
+  width: 100%;
+  height: 100%;
+  min-height: 150px;
+}
+
+.eeg-waveform-line {
+  fill: none;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.eeg-waveform-alpha {
+  stroke: #3b82f6;
+}
+
+.eeg-waveform-beta {
+  stroke: #ef4444;
+}
+
+.eeg-waveform-delta {
+  stroke: #10b981;
+}
+
+.eeg-waveform-theta {
+  stroke: #f59e0b;
+}
+
+.eeg-frequency-chart {
+  width: 100%;
+  height: 200px;
+  border-radius: 0.5rem;
+  overflow: hidden;
+}
+
+.eeg-3d-brain {
+  width: 100%;
+  height: 300px;
+  border-radius: 0.5rem;
+  overflow: hidden;
+}
+
+.eeg-tab {
+  padding: 0.75rem 1.5rem;
+  font-weight: 500;
+  color: #64748b;
+  border-bottom: 2px solid transparent;
+  transition: all 0.2s ease;
+}
+
+.eeg-tab:hover {
+  color: #334155;
+}
+
+.eeg-tab.active {
+  color: #3b82f6;
+  border-bottom-color: #3b82f6;
+}
+
+.eeg-device-info {
+  background-color: white;
+  border-radius: 0.75rem;
+  padding: 1.25rem;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+}
+
+.eeg-device-name {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #1e293b;
+  margin-bottom: 0.5rem;
+}
+
+.eeg-device-stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  color: #64748b;
+  font-size: 0.875rem;
+}
+
+.eeg-action-button {
+  background-color: #3b82f6;
   color: white;
+  padding: 0.5rem 1.25rem;
+  border-radius: 0.5rem;
+  font-weight: 500;
+  transition: all 0.2s ease;
 }
 
-.App-link {
-  color: #61dafb;
+.eeg-action-button:hover {
+  background-color: #2563eb;
 }
 
-@keyframes App-logo-spin {
-  from {
+.eeg-data-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+.eeg-data-table th {
+  background-color: #f8fafc;
+  padding: 0.75rem 1rem;
+  font-weight: 500;
+  color: #64748b;
+  text-align: left;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.eeg-data-table td {
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid #e2e8f0;
+  color: #334155;
+}
+
+.eeg-data-table tr:hover td {
+  background-color: #f1f5f9;
+}
+
+/* 查询面板样式 */
+.query-panel {
+  background-color: white;
+  border-radius: 1rem;
+  padding: 2rem;
+  margin-bottom: 2rem;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba(229, 231, 235, 0.5);
+  transition: all 0.3s ease;
+}
+
+.query-panel input[type="date"],
+.query-panel select {
+  border: 1px solid #e2e8f0;
+  border-radius: 0.5rem;
+  padding: 0.75rem 1rem;
+  margin-right: 1.5rem;
+  font-size: 0.95rem;
+  color: #475569;
+  background-color: #f8fafc;
+  transition: all 0.2s ease;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.query-panel input[type="date"]:focus,
+.query-panel select:focus {
+  outline: none;
+  border-color: #6366f1;
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+}
+
+.query-panel button {
+  background-color: #4f46e5;
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.5rem;
+  border: none;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 6px -1px rgba(79, 70, 229, 0.2);
+}
+
+.query-panel button:hover {
+  background-color: #4338ca;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 8px -1px rgba(79, 70, 229, 0.3);
+}
+
+/* 数据表格样式 */
+.data-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  background-color: white;
+  border-radius: 1rem;
+  overflow: hidden;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+}
+
+.data-table th,
+.data-table td {
+  padding: 1rem 1.5rem;
+  text-align: left;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.data-table th {
+  background-color: #f8fafc;
+  font-weight: 600;
+  color: #475569;
+  text-transform: uppercase;
+  font-size: 0.85rem;
+  letter-spacing: 0.05em;
+}
+
+.data-table tr:hover {
+  background-color: #f1f5f9;
+}
+
+.data-table td {
+  color: #475569;
+  font-size: 0.95rem;
+}
+
+/* 可视化容器样式 */
+.visualization-container {
+  background-color: white;
+  border-radius: 1rem;
+  padding: 2rem;
+  min-height: 500px;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba(229, 231, 235, 0.5);
+  transition: all 0.3s ease;
+}
+
+.visualization-container:hover {
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.05);
+}
+
+/* D3图表交互样式 */
+circle:hover,
+rect:hover {
+  opacity: 0.8;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  filter: brightness(1.1);
+}
+
+/* 加载动画样式 */
+.loading-spinner {
+  border: 3px solid rgba(99, 102, 241, 0.1);
+  border-radius: 50%;
+  border-top: 3px solid #4f46e5;
+  width: 50px;
+  height: 50px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% {
     transform: rotate(0deg);
   }
-  to {
+
+  100% {
     transform: rotate(360deg);
   }
+}
+
+/* 标题样式 */
+h1,
+h2,
+h3 {
+  color: #1e293b;
+  font-weight: 600;
+  letter-spacing: -0.025em;
+}
+
+/* 响应式调整 */
+@media (max-width: 768px) {
+  .query-panel {
+    padding: 1.5rem;
+  }
+
+  .visualization-container {
+    padding: 1.5rem;
+    overflow-x: auto;
+  }
+
+  .data-table th,
+  .data-table td {
+    padding: 0.75rem 1rem;
+  }
+}
+
+/* 卡片悬停效果 */
+.card {
+  transition: all 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.05);
+}
+
+/* 按钮组样式 */
+.button-group {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.button-group button {
+  background-color: #f8fafc;
+  color: #475569;
+  border: 1px solid #e2e8f0;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  transition: all 0.2s ease;
+}
+
+.button-group button.active {
+  background-color: #4f46e5;
+  color: white;
+  border-color: #4f46e5;
+}
+
+/* 工具提示样式 */
+.tooltip {
+  background-color: rgba(0, 0, 0, 0.8);
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 0.375rem;
+  font-size: 0.875rem;
+  pointer-events: none;
+  white-space: nowrap;
 }
