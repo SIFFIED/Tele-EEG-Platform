@@ -29,7 +29,7 @@ const TimeFrequencyChart: React.FC<TimeFrequencyChartProps> = ({
         const value = waveData[waveType as keyof WaveData][timeIndex];
         if (typeof value === 'number') {
           // 将值标准化到0-1之间
-          const normalizedValue = Math.abs(value) / 100;
+          const normalizedValue = Math.abs(value);
           displayData.push([timeIndex, waveIndex, normalizedValue]);
         }
       });
@@ -90,7 +90,7 @@ const TimeFrequencyChart: React.FC<TimeFrequencyChartProps> = ({
       },
       visualMap: {
         min: 0,
-        max: 1,
+        max: 3,
         calculable: true,
         orient: 'vertical',
         right: '0%',

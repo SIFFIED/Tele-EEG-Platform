@@ -1,44 +1,50 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import electrodeMapImage from '../assets/images/001.png';
+
+// 提前在模块作用域预加载图片
+const preloadedImage = new Image();
+preloadedImage.src = electrodeMapImage;
 
 // 电极位置图组件
 export const ElectrodeMap: React.FC = () => {
+  // 添加加载状态管理
+  const [imageLoaded, setImageLoaded] = useState(preloadedImage.complete);
+
+  // 使用effect处理图片加载
+  useEffect(() => {
+    // 如果图片已经加载完成则直接设置状态
+    if (preloadedImage.complete) {
+      setImageLoaded(true);
+      return;
+    }
+
+    // 否则等待加载完成
+    const handleLoad = () => setImageLoaded(true);
+    preloadedImage.addEventListener('load', handleLoad);
+
+    return () => {
+      preloadedImage.removeEventListener('load', handleLoad);
+    };
+  }, []);
+
   return (
-    <div className="w-full h-full flex items-center justify-center">
+    <div className="w-full h-full flex items-center justify-center overflow-hidden">
       <img
         src={electrodeMapImage}
         alt="电极位置图"
-        className="max-w-full max-h-full object-contain"
-        style={{ filter: 'brightness(0.95)' }} // 轻微调整亮度以匹配UI风格
+        className={`max-w-full max-h-full object-contain ${imageLoaded ? 'opacity-100' : 'opacity-0'}`}
+        style={{
+          filter: 'brightness(1.05) contrast(1.05)',
+          width: '90%',
+          height: 'auto',
+          transition: 'opacity 0.3s ease-in-out'
+        }}
+        loading="eager"
+        decoding="async"
+        onLoad={() => setImageLoaded(true)}
+
       />
     </div>
   );
 };
 
-// 信号质量热力图组件
-export const SignalQualityMap: React.FC = () => {
-  return (
-    <div className="w-full h-full flex items-center justify-center">
-      <svg viewBox="0 0 200 200" className="w-full h-full">
-        {/* 头部轮廓 */}
-        <circle cx="100" cy="100" r="80" fill="none" stroke="#ccc" strokeWidth="2" />
-
-        {/* 电极点 - 使用不同颜色表示信号质量 */}
-        <circle cx="100" cy="40" r="8" fill="#4CAF50" /> {/* 优 */}
-        <circle cx="60" cy="60" r="8" fill="#4CAF50" />
-        <circle cx="140" cy="60" r="8" fill="#FFC107" /> {/* 中 */}
-        <circle cx="40" cy="100" r="8" fill="#FFC107" />
-        <circle cx="160" cy="100" r="8" fill="#F44336" /> {/* 差 */}
-        <circle cx="60" cy="140" r="8" fill="#F44336" />
-        <circle cx="140" cy="140" r="8" fill="#4CAF50" />
-
-        {/* 中心点 */}
-        <circle cx="100" cy="100" r="8" fill="#2196F3" />
-
-        {/* 连接线 */}
-        <line x1="100" y1="40" x2="100" y2="160" stroke="#eee" strokeWidth="1" />
-        <line x1="40" y1="100" x2="160" y2="100" stroke="#eee" strokeWidth="1" />
-      </svg>
-    </div>
-  );
-}; 

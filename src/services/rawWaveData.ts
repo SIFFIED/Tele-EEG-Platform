@@ -76,7 +76,7 @@ const fetchRawBrainwaveData = async (): Promise<BrainwaveDataItem[]> => {
 };
 
 // 获取原始脑电数据的自定义Hook
-export const useRawBrainwaveData = (refreshInterval: number = 1000): RawBrainwaveData => {
+export const useRawBrainwaveData = (refreshInterval?: number): RawBrainwaveData => {
   const [rawData, setRawData] = useState<RawBrainwaveData>({
     FP1: [],
     FP2: [],
@@ -96,6 +96,11 @@ export const useRawBrainwaveData = (refreshInterval: number = 1000): RawBrainwav
   const currentDataRef = useRef<RawBrainwaveData>(rawData);
 
   useEffect(() => {
+    // 如果refreshInterval未定义或为0，表示不需要获取数据
+    if (refreshInterval === undefined || refreshInterval <= 0) {
+      return;
+    }
+
     const fetchData = async () => {
       // 如果正在获取数据，则跳过
       if (isFetching) return;
