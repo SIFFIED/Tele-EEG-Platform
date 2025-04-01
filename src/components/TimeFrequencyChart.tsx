@@ -1,18 +1,19 @@
 import React, { useEffect, useRef } from 'react';
 import * as echarts from 'echarts';
+import { useSelector } from 'react-redux';
 import { WaveData } from '../services/analysisWaveData';
+import { RootState } from '../redux/store';
 
 interface TimeFrequencyChartProps {
   data: WaveData;
-  currentIndex: number;
-  isPlaying: boolean;
 }
 
-const TimeFrequencyChart: React.FC<TimeFrequencyChartProps> = ({
-  data,
-  currentIndex,
-  isPlaying
-}) => {
+const TimeFrequencyChart: React.FC<TimeFrequencyChartProps> = ({ data }) => {
+  // 从Redux获取状态
+  const { currentIndex, isPlaying } = useSelector(
+    (state: RootState) => state.waveChart
+  );
+
   const chartRef = useRef<HTMLDivElement>(null);
   const chartInstance = useRef<echarts.ECharts | null>(null);
 

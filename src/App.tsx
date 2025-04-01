@@ -59,10 +59,6 @@ function App() {
   // 添加分析数据连接状态
   const [isAnalysisConnected, setIsAnalysisConnected] = useState(false);
 
-  // 添加播放控制状态
-  const [isPlaying, setIsPlaying] = useState(false);
-  const [currentIndex, setCurrentIndex] = useState(0);
-
   // 设备数据表格
   const [rawDataTable, setRawDataTable] = useState([
     {
@@ -485,10 +481,6 @@ function App() {
               >
                 <WaveChartController
                   data={analysisWaveData}
-                  isPlaying={isPlaying}
-                  setIsPlaying={setIsPlaying}
-                  currentIndex={currentIndex}
-                  setCurrentIndex={setCurrentIndex}
                 />
               </Card>
 
@@ -505,8 +497,6 @@ function App() {
                 <div className="h-96">
                   <TimeFrequencyChart
                     data={analysisWaveData}
-                    currentIndex={currentIndex}
-                    isPlaying={isPlaying}
                   />
                 </div>
               </Card>

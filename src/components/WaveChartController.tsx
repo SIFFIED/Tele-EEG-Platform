@@ -1,5 +1,13 @@
-import React, { useEffect, useRef, useState, useCallback } from 'react';
+import React, { useEffect, useRef, useCallback } from 'react';
 import * as echarts from 'echarts';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+  setPlaybackSpeed,
+  startPlayback,
+  stopPlayback,
+  setData
+} from '../redux/waveChartSlice';
+import { RootState } from '../redux/store';
 
 interface WaveData {
   alpha: number[];
@@ -8,27 +16,22 @@ interface WaveData {
   theta: number[];
 }
 
+// 更新接口，仅需传入data属性
 interface WaveChartControllerProps {
   data: WaveData;
-  isPlaying: boolean;
-  setIsPlaying: (playing: boolean) => void;
-  currentIndex: number;
-  setCurrentIndex: (index: number) => void;
 }
 
-const WaveChartController: React.FC<WaveChartControllerProps> = ({
-  data,
-  isPlaying,
-  setIsPlaying,
-  currentIndex,
-  setCurrentIndex
-}) => {
+const WaveChartController: React.FC<WaveChartControllerProps> = ({ data }) => {
+  // 使用Redux hooks获取状态
+  const dispatch = useDispatch();
+  const { isPlaying, currentIndex, playbackSpeed } = useSelector(
+    (state: RootState) => state.waveChart
+  );
+
   const alphaChartRef = useRef<HTMLDivElement>(null);
   const betaChartRef = useRef<HTMLDivElement>(null);
   const deltaChartRef = useRef<HTMLDivElement>(null);
   const thetaChartRef = useRef<HTMLDivElement>(null);
-
-  const [playbackSpeed, setPlaybackSpeed] = useState(100);
 
   const chartInstancesRef = useRef<{
     alpha: echarts.ECharts | null;
@@ -157,36 +160,16 @@ const WaveChartController: React.FC<WaveChartControllerProps> = ({
 
     window.addEventListener('resize', handleResize);
 
+    // 直接使用已导入的setData action
+    dispatch(setData(data));
+
     return () => {
       window.removeEventListener('resize', handleResize);
       Object.values(chartInstancesRef.current).forEach(chart => {
         chart?.dispose();
       });
     };
-  }, [initChart]);
-
-  // 播放控制
-  useEffect(() => {
-    let intervalId: NodeJS.Timeout | null = null;
-
-    if (isPlaying) {
-      intervalId = setInterval(() => {
-        const nextIndex = currentIndex + 1;
-        if (nextIndex >= data.alpha.length - 1) {
-          if (intervalId) clearInterval(intervalId);
-          setIsPlaying(false);
-        } else {
-          setCurrentIndex(nextIndex);
-        }
-      }, playbackSpeed);
-    }
-
-    return () => {
-      if (intervalId) {
-        clearInterval(intervalId);
-      }
-    };
-  }, [isPlaying, data, playbackSpeed, currentIndex, setCurrentIndex, setIsPlaying]);
+  }, [initChart, data, dispatch]);
 
   // 更新所有图表数据
   useEffect(() => {
@@ -197,16 +180,6 @@ const WaveChartController: React.FC<WaveChartControllerProps> = ({
     updateChartData(theta, data.theta, currentIndex);
   }, [currentIndex, data, updateChartData]);
 
-  const startPlayback = useCallback(() => {
-    setIsPlaying(true);
-    setCurrentIndex(0);
-  }, []);
-
-  const stopPlayback = useCallback(() => {
-    setIsPlaying(false);
-    setCurrentIndex(0);
-  }, []);
-
   return (
     <div className="space-y-4">
       <div className="flex items-center justify-end mb-4">
@@ -214,7 +187,7 @@ const WaveChartController: React.FC<WaveChartControllerProps> = ({
           <select
             className="border border-gray-300 rounded px-2 py-1 text-sm"
             value={playbackSpeed}
-            onChange={(e) => setPlaybackSpeed(Number(e.target.value))}
+            onChange={(e) => dispatch(setPlaybackSpeed(Number(e.target.value)))}
             disabled={isPlaying}
           >
             <option value="200">0.5x 速度</option>
@@ -226,7 +199,7 @@ const WaveChartController: React.FC<WaveChartControllerProps> = ({
               ? 'bg-red-500 hover:bg-red-600'
               : 'bg-green-500 hover:bg-green-600'
               }`}
-            onClick={() => (isPlaying ? stopPlayback() : startPlayback())}
+            onClick={() => dispatch(isPlaying ? stopPlayback() : startPlayback())}
           >
             {isPlaying ? '停止' : '播放'}
           </button>
